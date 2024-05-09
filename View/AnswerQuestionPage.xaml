@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FinaleProject.View.AnswerQuestionPage"
+             xmlns:ViewModel="clr-namespace:FinaleProject.ViewModel"
+             xmlns:Model="clr-namespace:FinaleProject.Model"
+             x:DataType="ViewModel:AnswerQuestionViewModel">
+    <ContentPage.Resources>
+        <Style x:Key="Button" TargetType="Button">
+            <Setter Property="WidthRequest" Value="100"/>
+            <Setter Property="BorderColor" Value="White"/>
+            <Setter Property="BorderWidth" Value="2"/>
+        </Style>
+        <Style x:Key="Title" TargetType="Label">
+            <Setter Property="FontSize" Value="22"/>
+        </Style>
+    </ContentPage.Resources>
+    
+    <Grid RowDefinitions="auto,*">
+        <Border Stroke="White" StrokeThickness="2" HeightRequest="100" Padding="30,0,30,0">
+            <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="10">
+                <Label Text="{Binding Quiz.Name}" FontAttributes="Bold" FontSize="30"/>
+                <Label Text="Quiz" FontSize="30"/>
+            </HorizontalStackLayout>
+        </Border>
+        <Grid Margin="10" VerticalOptions="Start" HeightRequest="850" ColumnDefinitions="*,*" Grid.Row="1">
+            <Grid Margin="10" RowDefinitions="auto,auto,auto,auto">
+                <Grid ColumnDefinitions="auto,auto,auto">
+                    <Label Text="Title" Style="{StaticResource Title}"/>
+                    <Label Text=")" Style="{StaticResource Title}" Grid.Column="1" Margin="0,0,10,0"/>
+                    <Label Text="{Binding CurrentQuestion.Title}" Style="{StaticResource Title}" Grid.Column="2"/>
+                </Grid>
+                <FlexLayout Direction="Column" Grid.Row="1" Margin="10">
+                    <CollectionView ItemsSource="{Binding ShuffledAllAnswers}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid ColumnDefinitions="auto,auto">
+                                    <Label Text="{Binding}" FontSize="20" VerticalOptions="Center" Grid.Column="1"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </FlexLayout>
+                <Entry Placeholder="Answer" Text="{Binding Text}" Grid.Row="2" Margin="10"/>
+                <Grid ColumnDefinitions="*,*,*" Grid.Row="3">
+                    <Button Text="Start" Style="{StaticResource Button}" Command="{Binding StartQuestionCommand}" IsEnabled="{Binding IsStartButtonEnabled}"/>
+                    <Button Text="Submit" Style="{StaticResource Button}" Command="{Binding SubmitCommand}" Grid.Column="2"/>
+                </Grid>
+            </Grid>
+            <Border Grid.Column="1">
+                <Label Text="Insert picture" VerticalOptions="Center" HorizontalOptions="Center" FontSize="24"/>
+            </Border>
+        </Grid>
+    </Grid>
+</ContentPage>

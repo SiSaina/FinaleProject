@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FinaleProject.View.SettingPage"
+             xmlns:ViewModel="clr-namespace:FinaleProject.ViewModel"
+             x:DataType="ViewModel:SettingViewModel">
+    <ContentPage.Resources>
+        <Style x:Key="LabelNavStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="26"/>
+        </Style>
+    </ContentPage.Resources>
+    <Grid RowDefinitions="auto,*">
+        <Border Stroke="White" StrokeThickness="2" Padding="30,0,30,0">
+            <Grid HeightRequest="100" ColumnDefinitions="*,*">
+                <Label Text="Profile" FontAttributes="Bold" FontSize="30" VerticalOptions="Center"/>
+                <FlexLayout JustifyContent="SpaceAround" AlignItems="Center" Grid.Column="1">
+                    <Label Text="Home" Style="{StaticResource LabelNavStyle}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label Text="Start" Style="{StaticResource LabelNavStyle}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label Text="History" Style="{StaticResource LabelNavStyle}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label Text="LeaderBoard" Style="{StaticResource LabelNavStyle}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label Text="Setting" Style="{StaticResource LabelNavStyle}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label Text="Log out" Style="{StaticResource LabelNavStyle}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </FlexLayout>
+            </Grid>
+        </Border>
+        <Grid ColumnDefinitions="*,*" Grid.Row="1" Padding="20">
+            <Border>
+                <Label Text="Insert picture" VerticalOptions="Center" HorizontalOptions="Center" FontSize="24"/>
+            </Border>
+            <Grid Padding="20" RowDefinitions="*,*,*" Grid.Column="1" HorizontalOptions="Start">
+                <Grid WidthRequest="300" HeightRequest="100" RowDefinitions="auto,auto">
+                    <HorizontalStackLayout>
+                        <Label Text="Student ID" Margin="10"/>
+                        <Label Text="*ID remain unchange" TextColor="Red" Margin="10"/>
+                    </HorizontalStackLayout>
+                    <Border Stroke="White" StrokeShape="RoundRectangle 20" Padding="10" Grid.Row="1">
+                        <Label Text="{Binding Student.Id}" VerticalOptions="Center" FontSize="24"/>
+                    </Border>
+                </Grid>
+                <Grid WidthRequest="300" HeightRequest="100" RowDefinitions="auto,auto" Grid.Row="1">
+                    <Label Text="Username" Margin="10"/>
+                    <Border Stroke="White" StrokeShape="RoundRectangle 20" Padding="10" Grid.Row="1">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer CommandParameter="{Binding Student.Username}"
+                                                  Command="{Binding ModifyCommand}"/>
+                        </Border.GestureRecognizers>
+                        <Label Text="{Binding Student.Username}" VerticalOptions="Center" FontSize="24"/>
+                    </Border>
+                </Grid>
+                <Grid WidthRequest="300" HeightRequest="100" RowDefinitions="auto,auto" Grid.Row="2">
+                    <Label Text="Password" Margin="10"/>
+                    <Border Stroke="White" StrokeShape="RoundRectangle 20" Padding="10" Grid.Row="1">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer CommandParameter="{Binding Student.Password}"
+                                                  Command="{Binding ModifyCommand}"/>
+                        </Border.GestureRecognizers>
+                        <Label Text="{Binding Student.Password}" VerticalOptions="Center" FontSize="24"/>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentPage>
