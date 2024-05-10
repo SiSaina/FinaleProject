@@ -121,8 +121,15 @@ public partial class StudentViewModel : BaseViewModel
         IsQuizPage = !IsQuizPage;
         if (IsPage)
         {
-            IsQuestionPage = !IsQuestionPage;
             GetQuizName(name);
+            if (ShowQuiz?.QuestionIds.Count < 20)
+            {
+                ToggleVisible();
+            }
+            else
+            {
+                IsQuestionPage = !IsQuestionPage;
+            }
         }
         else
         {
