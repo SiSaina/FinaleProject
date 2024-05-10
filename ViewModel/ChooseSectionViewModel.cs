@@ -17,7 +17,7 @@ public partial class ChooseSectionViewModel : BaseViewModel
     {
         if (string.IsNullOrWhiteSpace(name)) return;
 
-        Section section = Bank.Sections.FirstOrDefault(s => s.Name == name);
+        Section? section = Bank.Sections.FirstOrDefault(s => s.Name == name);
 
         if (section == null) return;
 
@@ -38,17 +38,6 @@ public partial class ChooseSectionViewModel : BaseViewModel
                 {"Section", section }
             });
         }
-    }
-    [RelayCommand]
-    async Task NavigateToChooseQuiz(string name)
-    {
-        if (string.IsNullOrWhiteSpace(name)) return;
-
-        Section section = Bank.Sections.FirstOrDefault(s => s.Name == name);
-
-        if (section == null) return;
-
-
     }
     [RelayCommand]
     async Task NavigateToDashBoard()

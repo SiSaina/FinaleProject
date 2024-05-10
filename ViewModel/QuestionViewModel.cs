@@ -15,12 +15,12 @@ public partial class QuestionViewModel : BaseViewModel
     {
         if (string.IsNullOrEmpty(Text))
         {
-            Application.Current.MainPage.DisplayAlert("Error", "Please enter an answer", "OK");
+            Application.Current?.MainPage?.DisplayAlert("Error", "Please enter an answer", "OK");
             return;
         }
         if (Question.Answer.Count >= 4)
         {
-            Application.Current.MainPage.DisplayAlert("Error", "You can only add up to 4 answer.", "OKazz");
+            Application.Current?.MainPage?.DisplayAlert("Error", "You can only add up to 4 answer.", "OKazz");
             return;
         }
 
@@ -33,12 +33,13 @@ public partial class QuestionViewModel : BaseViewModel
     {
         if (string.IsNullOrEmpty(Text))
         {
-            Application.Current.MainPage.DisplayAlert("Error", "Please enter an answer", "OK");
+            Application.Current?.MainPage?.DisplayAlert("Error", "Please enter an answer", "OK");
             return;
         }
         if (Question.CorrectAnswer.Count >= 4)
         {
-            Application.Current.MainPage.DisplayAlert("Error", "You can only add up to 4 correct answer.", "OKazz");
+            Application.Current?.MainPage?.DisplayAlert("Error", "You can only add up to 4 correct answer.", "OKazz");
+            return;
         }
 
         Question.CorrectAnswer.Add(Text);

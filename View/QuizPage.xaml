@@ -15,16 +15,24 @@
         <Label Text="Please select the question to add in quiz" Grid.Row="1" HorizontalOptions="Center" FontSize="20"/>
         <Button Text="Select Questions" WidthRequest="150" BorderColor="White" BorderWidth="2" Grid.Row="2" Command="{Binding SelectQuestionCommand}"/>
         <FlexLayout Direction="Row" Grid.Row="3" WidthRequest="600" HeightRequest="600">
-            <CollectionView ItemsSource="{Binding Quiz.QuestionNames}">
+            <CollectionView ItemsSource="{Binding ShowQuestions}">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Border Stroke="White" Padding="10" StrokeShape="RoundRectangle 10">
-                            <Label Text="{Binding}" FontSize="22"/>
+                    <DataTemplate x:DataType="Model:Question">
+                        <Border Stroke="White" StrokeShape="RoundRectangle 10" Padding="10">
+                            <HorizontalStackLayout>
+                                <Label Text="{Binding Id}" FontSize="22"/>
+                                <Label Text="." FontSize="22" Margin="0,0,10,0"/>
+                                <Label Text="{Binding Title}" FontSize="22"/>
+                            </HorizontalStackLayout>
                         </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </FlexLayout>
-        <Button Text="Back" WidthRequest="150" BorderColor="White" BorderWidth="2" Grid.Row="4" Command="{Binding NavigateBackCommand}"/>
+        <FlexLayout JustifyContent="SpaceBetween" Grid.Row="4" WidthRequest="500">
+            <Button Text="Show question" WidthRequest="150" BorderColor="White" BorderWidth="2" Command="{Binding ShowCommand}"/>
+            <Button Text="Back" WidthRequest="150" BorderColor="White" BorderWidth="2" Command="{Binding NavigateBackCommand}"/>
+        </FlexLayout>
+
     </Grid>
 </ContentPage>

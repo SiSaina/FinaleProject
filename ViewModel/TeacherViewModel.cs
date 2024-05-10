@@ -27,7 +27,6 @@ public partial class TeacherViewModel : BaseViewModel
         if (!string.IsNullOrEmpty(NewName))
         {
             sect.Name = NewName;
-            //Function save to file below
             Bank.SaveToFile();
         }
     }
@@ -46,21 +45,20 @@ public partial class TeacherViewModel : BaseViewModel
                 s.Id--;
             }
             Bank.SaveToFile();
-            //Function save to file below
         }
     }
     [RelayCommand]
-    async Task Save()
+    void Save()
     {
         Bank.SaveToFile();
-        await Application.Current.MainPage.DisplayAlert("File", "File save successfully", "Okazz");
+        Application.Current?.MainPage?.DisplayAlert("File", "File save successfully", "Okazz");
     }
 
     [RelayCommand]
     async Task NavigateForward(int sectionId)
     {
         if (sectionId <= 0) return;
-        Section section = Bank.Sections.FirstOrDefault(s => s.Id == sectionId);
+        Section? section = Bank.Sections.FirstOrDefault(s => s.Id == sectionId);
         if (section == null) return;
 
         await Shell.Current.GoToAsync(nameof(SectionPage), new Dictionary<string, object>
@@ -68,5 +66,10 @@ public partial class TeacherViewModel : BaseViewModel
             { "Section" , section },
             {"QuestionBank", Bank }
         });
+    }
+    [RelayCommand]
+    void Logout() 
+    {
+        Shell.Current.GoToAsync("..");
     }
 }

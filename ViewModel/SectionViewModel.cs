@@ -121,7 +121,7 @@ public partial class SectionViewModel : BaseViewModel
     async Task NavigateQuestion(int questionId)
     {
         if (questionId <= 0) return;
-        Question question = Section.Questions.FirstOrDefault(q => q.Id == questionId);
+        Question? question = Section.Questions.FirstOrDefault(q => q.Id == questionId);
         if (question == null) return;
 
         await Shell.Current.GoToAsync(nameof(QuestionPage), new Dictionary<string, object>
@@ -134,7 +134,7 @@ public partial class SectionViewModel : BaseViewModel
     async Task NavigateQuiz(int quizId)
     {
         if (quizId <= 0) return;
-        Quiz quiz = Section.Quizzes.FirstOrDefault(q => q.Id == quizId);
+        Quiz? quiz = Section.Quizzes.FirstOrDefault(q => q.Id == quizId);
         if (quiz == null) return;
 
         await Shell.Current.GoToAsync(nameof(QuizPage), new Dictionary<string, object>

@@ -8,7 +8,7 @@
              x:DataType="ViewModel:TeacherViewModel"
              Padding="0,50,0,0">
 
-    <FlexLayout Direction="Column" AlignItems="Center" Grid.Column="1">
+    <FlexLayout Direction="Column" AlignItems="Center">
         <Entry Text="{Binding Text}" WidthRequest="300" Placeholder="Section name"/>
         <Grid ColumnDefinitions="auto,auto">
             <Button Text="Add section" WidthRequest="150" BorderColor="White" BorderWidth="2"
@@ -52,5 +52,6 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        <Button Text="Logout" WidthRequest="100" BorderColor="White" BorderWidth="2" Command="{Binding LogoutCommand}"/>
     </FlexLayout>
 </ContentPage>

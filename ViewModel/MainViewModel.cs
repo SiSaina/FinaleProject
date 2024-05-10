@@ -4,34 +4,32 @@ public partial class MainViewModel : BaseViewModel
 {
     [ObservableProperty]
     StudentList list;
-
     [ObservableProperty]
     Student students;
-
     [ObservableProperty]
     QuestionBank bank;
 
     [RelayCommand]
-    async Task SignUp()
+    void SignUp()
     {
         if (string.IsNullOrWhiteSpace(Text) || string.IsNullOrWhiteSpace(Pass))
         {
-            await Application.Current.MainPage.DisplayAlert("Error", "Please enter a text", "OKazz");
+            Application.Current?.MainPage?.DisplayAlert("Error", "Please enter a text", "OKazz");
             return;
         }
         if (!int.TryParse(Num, out int stuId) || stuId <= 0)
         {
-            await Application.Current.MainPage.DisplayAlert("Error", "Please enter a valid numeric student ID", "OKazz");
+            Application.Current?.MainPage?.DisplayAlert("Error", "Please enter a valid numeric student ID", "OKazz");
             return;
         }
         if (Text.Length > 20 || Pass.Length > 20)
         {
-            await Application.Current.MainPage.DisplayAlert("Error", "Username and Password must be between 1 to 20 characters", "OKazz");
+            Application.Current?.MainPage?.DisplayAlert("Error", "Username and Password must be between 1 to 20 characters", "OKazz");
             return;
         }
         if (!IsUsernameTaken(Text))
         {
-            await Application.Current.MainPage.DisplayAlert("Error", "Username is taken", "OK");
+            Application.Current?.MainPage?.DisplayAlert("Error", "Username is taken", "OK");
             return;
         }
 
@@ -45,7 +43,7 @@ public partial class MainViewModel : BaseViewModel
         List.Students.Add(stu);
         List.SaveToFile();
 
-        await Application.Current.MainPage.DisplayAlert("New student",
+        Application.Current?.MainPage?.DisplayAlert("New student",
             $"ID: {stu.Id}\n" +
             $"Username: {stu.Username}\n" +
             $"Password: {stu.Password}\n", "Okazz");
@@ -55,18 +53,18 @@ public partial class MainViewModel : BaseViewModel
     }
 
     [RelayCommand]
-    async Task SignIn(string num)
+    void SignIn(string num)
     {
         int.TryParse(num, out int studentId);
 
         if (string.IsNullOrWhiteSpace(Text) || string.IsNullOrWhiteSpace(Pass))
         {
-            await Application.Current.MainPage.DisplayAlert("Error", "Please enter a text", "OKazz");
+            Application.Current?.MainPage?.DisplayAlert("Error", "Please enter a text", "OKazz");
             return;
         }
         if (Text == "Teacher" && Pass == "123")
         {
-            await Shell.Current.GoToAsync(nameof(TeacherDashBoard), new Dictionary<string, object>
+            Shell.Current.GoToAsync(nameof(TeacherDashBoard), new Dictionary<string, object>
             {
                 {"QuestionBank", Bank }
             });
@@ -74,23 +72,24 @@ public partial class MainViewModel : BaseViewModel
         }
         if (studentId <= 0)
         {
-            await Application.Current.MainPage.DisplayAlert("Error", "Please enter a valid numeric student ID", "OKazz");
+            Application.Current?.MainPage?.DisplayAlert("Error", "Please enter a valid numeric student ID", "OKazz");
             return;
         }
         if (!CheckStudent(studentId, Text, Pass))
         {
-            await Application.Current.MainPage.DisplayAlert("Error", "Invalid username or password", "Okazz");
+            Application.Current?.MainPage?.DisplayAlert("Error", "Invalid username or password", "Okazz");
             return;
         }
 
-        Student student = List.Students.FirstOrDefault(s => s.Id == studentId);
+        Student? student = List.Students.FirstOrDefault(s => s.Id == studentId);
         if (student == null) return;
 
-        await Shell.Current.GoToAsync(nameof(StudentDashBoard), new Dictionary<string, object>
-            {
-                {"Student", student },
-                {"QuestionBank", Bank }
-            });
+        Shell.Current.GoToAsync(nameof(StudentDashBoard), new Dictionary<string, object>
+        {
+            {"Student", student },
+            {"StudentList", List },
+            {"QuestionBank", Bank }
+        });
     }
     
 
