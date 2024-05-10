@@ -1,7 +1,4 @@
-﻿using System;
-using System.Xml.Linq;
-
-namespace FinaleProject.ViewModel;
+﻿namespace FinaleProject.ViewModel;
 
 [QueryProperty("Bank", "QuestionBank")]
 [QueryProperty("List", "StudentList")]
