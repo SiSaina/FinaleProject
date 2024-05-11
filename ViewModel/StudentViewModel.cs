@@ -129,6 +129,12 @@ public partial class StudentViewModel : BaseViewModel
             else
             {
                 IsQuestionPage = !IsQuestionPage;
+                Application.Current?.MainPage?.DisplayAlert("Starting...", 
+                    "Enter full detail answers\n" +
+                    "If there are more then one answers\n" +
+                    "Use comma to separate the answers\n" +
+                    "Good Luck.", 
+                    "Okazz");
             }
         }
         else

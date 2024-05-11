@@ -238,7 +238,7 @@
                     <Grid RowDefinitions="auto,auto">
                         <Grid HeightRequest="75" ColumnDefinitions="*,1.5*">
                             <Grid ColumnDefinitions="*,*">
-                                <Label Text="Home" Style="{StaticResource LabelTextThree}"/>
+                                <Label Text="Name" Style="{StaticResource LabelTextThree}"/>
                                 <Label Text="Description" Style="{StaticResource LabelTextThree}" Grid.Column="1"/>
                             </Grid>
                             <Grid ColumnDefinitions="*,*,*,*" Grid.Column="1">
